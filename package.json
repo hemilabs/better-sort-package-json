@@ -1,0 +1,149 @@
+{
+  "name": "better-sort-package-json",
+  "version": "1.0.0",
+  "description": "Sort a package.json file following the NPM docs",
+  "keywords": [
+    "docs",
+    "npmjs",
+    "package.json",
+    "properties",
+    "sort"
+  ],
+  "bugs": "https://github.com/hemilabs/better-sort-package-json/issues",
+  "license": "MIT",
+  "author": "Gabriel Montes <gabriel@bloq.com>",
+  "main": "src/index.js",
+  "bin": "bin/cli.js",
+  "repository": "hemilabs/better-sort-package-json",
+  "scripts": {
+    "coverage": "c8 npm test",
+    "format:check": "prettier --check .",
+    "knip": "knip",
+    "lint": "eslint --cache .",
+    "prepare": "husky",
+    "pretest": "prettier -w .",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "json-stable-stringify": "^1.1.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@types/chai": "^5.0.0",
+    "@types/mocha": "^10.0.8",
+    "@types/node": "^22.7.3",
+    "c8": "^10.1.2",
+    "chai": "^5.1.1",
+    "eslint": "^8.57.1",
+    "eslint-config-bloq": "^4.1.0",
+    "eslint-plugin-markdownlint": "^0.6.0",
+    "husky": "^9.1.6",
+    "knip": "^5.32.0",
+    "lint-staged": "^15.2.10",
+    "mocha": "^10.7.3",
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=16.9.0"
+  },
+  "type": "module",
+  "commitlint": {
+    "rules": {
+      "body-case": [
+        2,
+        "always",
+        [
+          "sentence-case"
+        ]
+      ],
+      "body-leading-blank": [
+        1,
+        "always"
+      ],
+      "header-case": [
+        2,
+        "always",
+        [
+          "sentence-case"
+        ]
+      ],
+      "header-full-stop": [
+        2,
+        "never",
+        "."
+      ],
+      "header-max-length": [
+        2,
+        "always",
+        50
+      ]
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "bloq",
+      "prettier"
+    ],
+    "overrides": [
+      {
+        "extends": [
+          "plugin:markdownlint/recommended"
+        ],
+        "files": [
+          "*.md"
+        ],
+        "parser": "eslint-plugin-markdownlint/parser",
+        "rules": {
+          "markdownlint/md013": "off",
+          "markdownlint/md034": "warn"
+        }
+      },
+      {
+        "extends": [
+          "bloq/mocha",
+          "prettier"
+        ],
+        "files": [
+          "*.test.js"
+        ],
+        "rules": {
+          "node/no-unpublished-require": "off"
+        }
+      },
+      {
+        "extends": [
+          "bloq/node",
+          "prettier"
+        ],
+        "files": [
+          "bin/*.js"
+        ]
+      }
+    ],
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "root": true
+  },
+  "knip": {
+    "ignoreDependencies": [
+      "@types/mocha",
+      "eslint-config-prettier",
+      "lint-staged"
+    ]
+  },
+  "lint-staged": {
+    "*,!*.{js,md},!package.json": [
+      "prettier --ignore-unknown --write"
+    ],
+    "*.{js,md}": [
+      "eslint --cache --fix --quiet",
+      "prettier --ignore-unknown --write"
+    ],
+    "package.json": [
+      "node bin/cli.js",
+      "prettier --ignore-unknown --write"
+    ]
+  },
+  "prettier": {}
+}
