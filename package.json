@@ -12,6 +12,10 @@
   "bugs": "https://github.com/hemilabs/better-sort-package-json/issues",
   "license": "MIT",
   "author": "Gabriel Montes <gabriel@bloq.com>",
+  "files": [
+    "bin",
+    "src"
+  ],
   "main": "src/index.js",
   "bin": "bin/cli.js",
   "repository": "hemilabs/better-sort-package-json",
