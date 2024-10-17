@@ -25,7 +25,6 @@
     "knip": "knip",
     "lint": "eslint --cache .",
     "prepare": "husky",
-    "pretest": "prettier -w .",
     "test": "mocha"
   },
   "dependencies": {
