@@ -1,6 +1,6 @@
 {
   "name": "better-sort-package-json",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sort a package.json file following the NPM docs",
   "keywords": [
     "docs",
