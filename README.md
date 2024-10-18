@@ -49,7 +49,7 @@ To i.e. let [`lint-staged`](https://github.com/lint-staged/lint-staged) take car
 
 ```json
 {
-  "*.json,!package.json": ["prettier --write"],
+  "!(package.json)": ["prettier --ignore-unknown --write"],
   "package.json": ["better-sort-package-json", "prettier --write"]
 }
 ```
