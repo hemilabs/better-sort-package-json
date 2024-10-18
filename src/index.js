@@ -42,6 +42,22 @@ const packageJsonStandardProperties = [
   "workspaces",
 ];
 /**
+ * These standard properties can be an array of strings and can be safely
+ * sorted.
+ * @type {string[]}
+ */
+const packageJsonSortableStringArrayProperties = [
+  "contributors",
+  "cpu",
+  "exports",
+  "files",
+  "funding",
+  "keywords",
+  "man",
+  "os",
+  "workspaces",
+];
+/**
  * Properties used by Node.js.
  * @see https://nodejs.org/api/packages.html#nodejs-packagejson-field-definitions
  * @type {string[]}
@@ -77,6 +93,7 @@ function sortProperties(object, properties) {
     }
     const value = object[property];
     if (
+      packageJsonSortableStringArrayProperties.includes(property) &&
       Array.isArray(value) &&
       value.every((element) => typeof element === "string")
     ) {
