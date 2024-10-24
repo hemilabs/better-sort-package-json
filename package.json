@@ -21,8 +21,8 @@
   "repository": "hemilabs/better-sort-package-json",
   "scripts": {
     "coverage": "c8 npm test",
+    "deps:check": "knip",
     "format:check": "prettier --check .",
-    "knip": "knip",
     "lint": "eslint --cache .",
     "prepare": "husky",
     "test": "mocha"
