@@ -68,6 +68,11 @@ const packageJsonNodeJsProperties = [
   "exports",
   "imports",
 ];
+/**
+ * Properties that should not be sorted. The order of their keys matter!
+ * @type {string[]}
+ */
+const packageJsonNotSortableRootProperties = ["exports"];
 
 const rootProperties = /** @type {string[]} */ ([]).concat(
   packageJsonStandardProperties,
@@ -129,7 +134,14 @@ function sortProperties(object, properties) {
  * @returns {string}
  */
 export function sortPackageJson(packageJsonStr) {
-  const recursivelySorted = stringify(JSON.parse(packageJsonStr));
-  const sorted = sortProperties(JSON.parse(recursivelySorted), rootProperties);
+  const packageJson = JSON.parse(packageJsonStr);
+  const recursivelySorted = JSON.parse(stringify(packageJson));
+  // Copy back any non-sortable root properties to undo the recursive sorting!
+  packageJsonNotSortableRootProperties.forEach(function (property) {
+    if (Object.hasOwn(recursivelySorted, property)) {
+      recursivelySorted[property] = packageJson[property];
+    }
+  });
+  const sorted = sortProperties(recursivelySorted, rootProperties);
   return `${JSON.stringify(sorted, null, 2)}\n`;
 }
