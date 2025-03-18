@@ -8,7 +8,8 @@ describe("Sort a package.json", function () {
   it("should sort the root properties", function () {
     const input = `{"prettier":{},"type":"module","keywords":["last","first"],
       "scripts":{"test":"mocha","pretest":"npm run lint",
-      "postinstall":"echo Done!"}}`;
+      "postinstall":"echo Done!"},"exports":{"node":"./index.js",
+      "default":"./index.js"}}`;
     const output = `{
   "keywords": [
     "first",
@@ -20,6 +21,10 @@ describe("Sort a package.json", function () {
     "test": "mocha"
   },
   "type": "module",
+  "exports": {
+    "node": "./index.js",
+    "default": "./index.js"
+  },
   "prettier": {}
 }
 `;
